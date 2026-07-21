@@ -2,6 +2,7 @@ import NavBar from "./navbar.jsx"
 import Hero from "./hero.jsx"
 import Projects from "./projects.jsx"
 import About from "./about.jsx"
+import Music from "./music.jsx"
 
 export default function App() {
 
@@ -11,6 +12,7 @@ export default function App() {
 	<Hero     />
 	<Projects />
 	<About />
+  <Music />
   </>
   );
 }

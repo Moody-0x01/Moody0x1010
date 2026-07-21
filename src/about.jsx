@@ -3,39 +3,28 @@ import './css/About.css';
 
 const skills = [
   {
-    category: "Languages & Core",
-    items: ["C++", "Rust", "Python", "JavaScript / React"]
-  },
-  {
-    category: "Systems & Network",
-    items: ["Unix Domain Sockets", "Network Multiplexing (epoll)", "FastAPI", "CGI Scripts"]
+    category: "Languages & technologies",
+    items: ["C/C++", "Rust", "Python", "JavaScript / React", "FastAPI", "Flask", "Tailwind CSS", "SQLite", "Go", "bash"]
   },
   {
     category: "Environment & Tools",
-    items: ["Arch Linux", "Neovim", "Git", "Tailwind CSS"]
-  }
+    items: ["Linux", "Neovim", "vscode", "Git", "Docker", "tmux", "Zsh", "fish"]
+  },
 ];
 
 const experience = [
   {
-    role: "Backend / Software Engineer",
+    role: "Backend / Software Engineer — Internship",
     company: "Hztech",
-    period: "2025 — Present",
-    description: "Engineering backend services, optimizing data pipelines, and implementing real-time communications architecture.",
-    technologies: ["Python", "FastAPI", "Rust", "Linux"]
+    period: "2022 May — 2022 September",
+    description: "Developed and launched the official company web application using Golang, Svelte, and SQLite, optimizing database queries to ensure smooth data persistence.. and engineered the user interface for a dedicated electronic software solution, focusing on component reliability and clean data integration",
+    technologies: ["Svelte", "Linux", "Go"]
   },
-  {
-    role: "Systems Developer & Contributor",
-    company: "Independent / Open Source",
-    period: "2024 — 2025",
-    description: "Designed low-level utilities, custom HTTP web servers, and inter-process daemon communication systems.",
-    technologies: ["C++98", "Rust", "Sockets", "IPC"]
-  }
 ];
 
 export default function About() {
   return (
-    <section id="about" className="py-24 bg-[#0a0a0a] text-neutral-100 px-6 border-t border-neutral-900 font-sans">
+    <section id="about" className="relative overflow-hidden py-24 bg-[#0a0a0a] text-neutral-100 px-6 border-t border-neutral-900">
       <div className="max-w-6xl mx-auto space-y-20">
         
         {/* Section 1: Overview & Stack */}
@@ -55,7 +44,7 @@ export default function About() {
             </h2>
 
             <p className="text-xs sm:text-sm text-neutral-400 leading-relaxed">
-              I am a backend developer focused on systems programming, network utilities, and performant web services. I enjoy peeling back high-level abstractions to write efficient C++, Rust, and Python services tailored for performance and stability.
+              I build backend-focused software for systems programming, network utilities, and performant web services. I like working close to the metal, shipping reliable C++, Rust, and Python tools that stay fast under load.
             </p>
 
             {/* Quick Environment Callout */}
@@ -69,7 +58,7 @@ export default function About() {
                   </div>
                   <div>
                     <h4 className="text-xs font-semibold text-neutral-200">Primary Environment</h4>
-                    <p className="text-[11px] font-mono text-neutral-500">Arch Linux // Neovim</p>
+                    <p className="text-[11px] font-mono text-neutral-500">Arch Linux / Neovim / fish</p>
                   </div>
                 </div>
               </div>
