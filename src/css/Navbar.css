@@ -1,0 +1,12 @@
+/* Custom subtle glow or utility extensions for Navbar if needed */
+.navbar-subtle-glow {
+  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.5);
+
+}
+
+/* Custom font stack for crisp rendering across all OSs */
+nav, header {
+  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
