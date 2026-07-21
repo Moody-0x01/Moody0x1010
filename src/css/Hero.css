@@ -6,3 +6,31 @@
     rgba(0, 0, 0, 0) 70%
   );
 }
+
+@keyframes pulseGlow {
+  0%, 100% {
+    opacity: 0.15;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.25;
+    transform: scale(1.08);
+  }
+}
+
+.hero-glow {
+  background: radial-gradient(
+    circle at 50% 30%,
+    rgba(255, 255, 255, 0.08) 0%,
+    rgba(0, 0, 0, 0) 70%
+  );
+  animation: pulseGlow 8s ease-in-out infinite;
+}
+
+/* Subtle dark grid background pattern */
+.bg-grid-pattern {
+  background-size: 32px 32px;
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+}

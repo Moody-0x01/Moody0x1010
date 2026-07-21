@@ -3,6 +3,7 @@ import Hero from "./hero.jsx"
 import Projects from "./projects.jsx"
 import About from "./about.jsx"
 import Music from "./music.jsx"
+import Contact from "./contact.jsx"
 
 export default function App() {
 
@@ -13,6 +14,7 @@ export default function App() {
 	<Projects />
 	<About />
   <Music />
+  <Contact />
   </>
   );
 }

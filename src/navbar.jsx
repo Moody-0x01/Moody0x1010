@@ -5,105 +5,88 @@ import './css/Navbar.css';
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
 
+  const navLinks = [
+    { name: 'About', href: '#about' },
+    { name: 'Projects', href: '#projects' },
+    { name: 'Music', href: '#music' },
+    { name: 'Contact', href: '#contact' },
+  ];
+
+  const handleLinkClick = () => {
+    setIsOpen(false);
+  };
+
   return (
-    <header className="sticky top-0 z-50 w-full bg-[#0a0a0a] border-b border-neutral-800/80 font-sans">
+    <header className="sticky top-0 z-50 w-full bg-[#000000] backdrop-blur-xl border-b border-neutral-800 font-sans transition-colors duration-300">
       <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
         
-        {/* Brand Logo & Title */}
+        {/* Brand Logo - Added subtle dark background pill for isolation */}
         <a 
           href="#" 
-          className="flex items-center gap-3 px-2 py-1.5 rounded-lg hover:bg-neutral-900 transition-colors duration-200 group"
+          className="flex items-center gap-3 p-1.5 rounded-lg bg-neutral-900/60 border border-neutral-800/60 hover:bg-neutral-800/80 hover:border-neutral-700 transition-all duration-200 group"
         >
           <img 
             src={logo} 
             alt="Logo" 
-            className="h-6 w-auto opacity-90 group-hover:opacity-100 transition-opacity" 
+            className="h-6 w-auto brightness-110 group-hover:scale-105 transition-transform duration-200" 
           />
         </a>
 
-        {/* Desktop Links with Pill Background Hovers */}
-        <nav className="hidden md:flex items-center gap-1">
-          <li>
+        {/* Desktop Navigation - High Contrast Links */}
+        <nav className="hidden md:flex items-center gap-1.5">
+          {navLinks.map((link) => (
             <a 
-              href="#section1" 
-              className="px-3.5 py-1.5 rounded-md text-xs font-medium tracking-wide text-neutral-400 hover:text-neutral-100 hover:bg-neutral-800/70 transition-all duration-200 block"
+              key={link.name}
+              href={link.href} 
+              className="px-4 py-2 rounded-lg text-xs font-semibold tracking-wide text-neutral-300 hover:text-white hover:bg-neutral-800/90 active:bg-neutral-700 transition-all duration-200 ease-in-out"
             >
-              Section 1
+              {link.name}
             </a>
-          </li>
-          <li>
-            <a 
-              href="#section2" 
-              className="px-3.5 py-1.5 rounded-md text-xs font-medium tracking-wide text-neutral-400 hover:text-neutral-100 hover:bg-neutral-800/70 transition-all duration-200 block"
-            >
-              Section 2
-            </a>
-          </li>
-          <li>
-            <a 
-              href="#section3" 
-              className="px-3.5 py-1.5 rounded-md text-xs font-medium tracking-wide text-neutral-400 hover:text-neutral-100 hover:bg-neutral-800/70 transition-all duration-200 block"
-            >
-              Section 3
-            </a>
-          </li>
-          <li>
-            <a 
-              href="#section4" 
-              className="px-3.5 py-1.5 rounded-md text-xs font-medium tracking-wide text-neutral-400 hover:text-neutral-100 hover:bg-neutral-800/70 transition-all duration-200 block"
-            >
-              Section 4
-            </a>
-          </li>
+          ))}
         </nav>
 
         {/* Mobile Hamburger Button */}
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="md:hidden flex flex-col justify-center gap-1.5 p-2 rounded-lg hover:bg-neutral-800/80 transition-colors focus:outline-none"
+          className="md:hidden flex flex-col justify-center items-center w-10 h-10 gap-1.5 rounded-lg bg-neutral-900 border border-neutral-800 hover:bg-neutral-800 transition-colors duration-200 focus:outline-none"
           aria-label="Toggle menu"
         >
-          <span className={`h-0.5 w-5 bg-neutral-300 rounded-full transition-transform duration-200 ${isOpen ? 'rotate-45 translate-y-2' : ''}`} />
-          <span className={`h-0.5 w-5 bg-neutral-300 rounded-full transition-opacity duration-200 ${isOpen ? 'opacity-0' : ''}`} />
-          <span className={`h-0.5 w-5 bg-neutral-300 rounded-full transition-transform duration-200 ${isOpen ? '-rotate-45 -translate-y-2' : ''}`} />
+          <span 
+            className={`h-0.5 w-5 bg-white rounded-full transform transition-all duration-300 ease-in-out ${
+              isOpen ? 'rotate-45 translate-y-2' : ''
+            }`} 
+          />
+          <span 
+            className={`h-0.5 w-5 bg-white rounded-full transition-opacity duration-200 ease-in-out ${
+              isOpen ? 'opacity-0' : 'opacity-100'
+            }`} 
+          />
+          <span 
+            className={`h-0.5 w-5 bg-white rounded-full transform transition-all duration-300 ease-in-out ${
+              isOpen ? '-rotate-45 -translate-y-2' : ''
+            }`} 
+          />
         </button>
       </div>
 
-      {/* Mobile Dropdown */}
-      <div className={`md:hidden overflow-hidden transition-all duration-300 ease-in-out bg-[#0a0a0a] border-b border-neutral-800 ${isOpen ? 'max-h-64 opacity-100' : 'max-h-0 opacity-0'}`}>
-        <ul className="flex flex-col py-3 px-4 gap-1">
-          <li>
-            <a 
-              href="#section1" 
-              className="block px-3 py-2 rounded-md text-xs font-medium text-neutral-400 hover:text-white hover:bg-neutral-800/70 transition-colors"
-            >
-              Section 1
-            </a>
-          </li>
-          <li>
-            <a 
-              href="#section2" 
-              className="block px-3 py-2 rounded-md text-xs font-medium text-neutral-400 hover:text-white hover:bg-neutral-800/70 transition-colors"
-            >
-              Section 2
-            </a>
-          </li>
-          <li>
-            <a 
-              href="#section3" 
-              className="block px-3 py-2 rounded-md text-xs font-medium text-neutral-400 hover:text-white hover:bg-neutral-800/70 transition-colors"
-            >
-              Section 3
-            </a>
-          </li>
-          <li>
-            <a 
-              href="#section4" 
-              className="block px-3 py-2 rounded-md text-xs font-medium text-neutral-400 hover:text-white hover:bg-neutral-800/70 transition-colors"
-            >
-              Section 4
-            </a>
-          </li>
+      {/* Mobile Dropdown Menu */}
+      <div 
+        className={`md:hidden overflow-hidden transition-all duration-300 ease-in-out bg-[#050505] border-b border-neutral-800 ${
+          isOpen ? 'max-h-64 opacity-100 py-3' : 'max-h-0 opacity-0 py-0 border-b-0'
+        }`}
+      >
+        <ul className="flex flex-col px-6 gap-1">
+          {navLinks.map((link) => (
+            <li key={link.name}>
+              <a 
+                href={link.href} 
+                onClick={handleLinkClick}
+                className="block px-4 py-2.5 rounded-lg text-xs font-semibold text-neutral-300 hover:text-white hover:bg-neutral-800/80 transition-all duration-200"
+              >
+                {link.name}
+              </a>
+            </li>
+          ))}
         </ul>
       </div>
     </header>
