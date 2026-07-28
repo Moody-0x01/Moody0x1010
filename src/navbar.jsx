@@ -23,25 +23,22 @@ export default function Navbar() {
         {/* Brand Logo - Added subtle dark background pill for isolation */}
         <a 
           href="#" 
-          className="flex items-center gap-3 p-1.5 rounded-lg bg-neutral-900/60 border border-neutral-800/60 hover:bg-neutral-800/80 hover:border-neutral-700 transition-all duration-200 group"
+          className="flex items-center gap-3 p-1.5 rounded-lg group"
         >
           <img 
             src={logo} 
             alt="Logo" 
-            className="h-6 w-auto brightness-110 group-hover:scale-105 transition-transform duration-200" 
+            className="h-8 w-auto brightness-110" 
           />
         </a>
 
         {/* Desktop Navigation - High Contrast Links */}
         <nav className="hidden md:flex items-center gap-1.5">
-          {navLinks.map((link) => (
-            <a 
-              key={link.name}
-              href={link.href} 
-              className="px-4 py-2 rounded-lg text-xs font-semibold tracking-wide text-neutral-300 hover:text-white hover:bg-neutral-800/90 active:bg-neutral-700 transition-all duration-200 ease-in-out"
-            >
-              {link.name}
-            </a>
+          {
+            navLinks.map((link) => (
+              <a key={link.name} 
+                href={link.href} 
+                className=" relative px-4 py-2 text-[12px] font-medium tracking-[0.08em] uppercase text-neutral-500 transition-colors duration-200 hover:text-white after:absolute after:left-0 after:bottom-0 after:h-px after:w-0 after:bg-white after:transition-all after:duration-300 hover:after:w-full " > {link.name} </a>
           ))}
         </nav>
 
