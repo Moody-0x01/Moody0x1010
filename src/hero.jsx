@@ -1,13 +1,23 @@
 import React from 'react';
 import './css/Hero.css';
+import Orb from './comps/orb.jsx';
 
 export default function Hero() {
   return (
     <section className="relative w-full min-h-[calc(100vh-4rem)] flex flex-col items-center justify-center bg-[#0a0a0a] text-neutral-100 px-6 overflow-hidden">
-      
+     
       {/* Background Subtle Grid Pattern */}
-      <div className="absolute inset-0 bg-grid-pattern opacity-60 pointer-events-none" />
-
+        <div className="absolute inset-0 bg-grid-pattern opacity-60 pointer-events-none" />
+      <div className="absolute top-[0px] left-1/2 -translate-x-1/2 z-0" >
+        <Orb
+          hoverIntensity={1.39}
+          rotateOnHover={false}
+          hue={60}
+          forceHoverState={false}
+          backgroundColor="#ca0000ff"
+          height={1000}
+        />
+      </div>
       {/* Radial Glow Highlight */}
       <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] hero-glow pointer-events-none" />
 
