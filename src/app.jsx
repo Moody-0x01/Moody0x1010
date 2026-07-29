@@ -4,6 +4,7 @@ import Projects from "./projects.jsx"
 import About from "./about.jsx"
 import Music from "./music.jsx"
 import Contact from "./contact.jsx"
+// import Player  from "./Music_player.jsx"
 
 export default function App() {
 
@@ -15,6 +16,7 @@ export default function App() {
 	<About />
   <Music />
   <Contact />
+  {/* <Player/> */}
   </>
   );
 }

@@ -3,7 +3,7 @@
   -webkit-font-smoothing: antialiased;
 }
 
-/* Custom Webkit Range Slider Styling for Progress & Volume */
+/* Minimal Custom Webkit Range Slider Styling */
 input[type="range"]::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
@@ -12,6 +12,11 @@ input[type="range"]::-webkit-slider-thumb {
   border-radius: 50%;
   background: #ffffff;
   cursor: pointer;
+  transition: transform 0.15s ease;
+}
+
+input[type="range"]::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
 }
 
 input[type="range"]::-moz-range-thumb {
@@ -21,4 +26,9 @@ input[type="range"]::-moz-range-thumb {
   background: #ffffff;
   cursor: pointer;
   border: none;
+  transition: transform 0.15s ease;
+}
+
+input[type="range"]::-moz-range-thumb:hover {
+  transform: scale(1.2);
 }

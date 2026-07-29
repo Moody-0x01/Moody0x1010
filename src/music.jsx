@@ -43,13 +43,13 @@ const tracksData = [
   },
   {
     title: "Snaps",
-    genre: "Electronic",
+    genre: "Jersey/Dance/Electronic",
     cover: coverSnaps,
     audio: snaps
   },
   {
     title: "Spoon Head",
-    genre: "Drum & Bass",
+    genre: "Jersey/House/Electronic",
     cover: coverSpoonHead,
     audio: spoonHead
   }
@@ -57,9 +57,10 @@ const tracksData = [
 
 export default function Music() {
   const [currentTrack, setCurrentTrack] = useState(null);
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [progress, setProgress] = useState(0);
-  const [duration, setDuration] = useState(0);
+  const [isPlaying,    setIsPlaying   ] = useState(false);
+  const [progress,     setProgress    ] = useState(0);
+  const [duration,     setDuration    ] = useState(0);
+  const [volume,       setVolume      ] = useState(1);
 
   const audioRef = useRef(null);
 
@@ -93,12 +94,37 @@ export default function Music() {
     }
   };
 
+  const handleVolumeChange = (e) => {
+    const newVolume = Number(e.target.value);
+    setVolume(newVolume);
+    if (audioRef.current) {
+      audioRef.current.volume = newVolume;
+    }
+  };
+
+  const toggleMute = () => {
+    if (volume > 0) {
+      setVolume(0);
+      if (audioRef.current) audioRef.current.volume = 0;
+    } else {
+      setVolume(1);
+      if (audioRef.current) audioRef.current.volume = 1;
+    }
+  };
+
   useEffect(() => {
     if (currentTrack && audioRef.current) {
       audioRef.current.play();
+      audioRef.current.volume = volume;
       setIsPlaying(true);
     }
   }, [currentTrack]);
+
+  useEffect(() => {
+    if (audioRef.current) {
+      audioRef.current.volume = volume;
+    }
+  }, [volume]);
 
   const formatTime = (time) => {
     if (isNaN(time)) return "0:00";
@@ -106,6 +132,8 @@ export default function Music() {
     const seconds = Math.floor(time % 60);
     return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
   };
+
+  const seekerPercent = duration ? (progress / duration) * 100 : 0;
 
   return (
     <section id="music" className="py-24 bg-[#0a0a0a] text-neutral-100 px-6 border-t border-neutral-900 font-sans pb-32">
@@ -151,7 +179,6 @@ export default function Music() {
                       }`}
                     />
                   ) : (
-                    /* Fallback Icon if cover path is missing */
                     <div className="text-neutral-700">
                       <svg className="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12 0c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" />
@@ -198,74 +225,120 @@ export default function Music() {
 
       </div>
 
-      {/* Floating Sticky Audio Player Bar */}
+      {/* Floating Sticky Audio Player Bar (High Contrast) */}
       {currentTrack && (
-        <div className="fixed bottom-0 left-0 right-0 z-50 bg-[#0a0a0a]/95 backdrop-blur-xl border-t border-neutral-800 px-6 py-3 shadow-2xl animate-fadeIn">
-          <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+        <div className="fixed bottom-0 left-0 right-0 z-50 bg-[#0a0a0a]/95 backdrop-blur-xl border-t border-neutral-800 px-4 sm:px-6 py-2.5 shadow-2xl">
+          <div className="max-w-7xl mx-auto flex items-center justify-between gap-3 sm:gap-6 h-10 text-xs">
             
-            <div className="flex items-center gap-3 w-full md:w-1/4">
+            {/* 1. Cover + Name */}
+            <div className="flex items-center gap-3 min-w-[120px] sm:min-w-[180px] max-w-[220px] flex-shrink-0">
               {currentTrack.cover && (
                 <img 
                   src={currentTrack.cover} 
                   alt={currentTrack.title} 
-                  className="w-10 h-10 rounded-lg object-cover border border-neutral-800"
+                  className="w-9 h-9 rounded-md object-cover border border-neutral-800 flex-shrink-0"
                 />
               )}
-              <div className="overflow-hidden">
-                <h4 className="text-xs font-semibold text-white truncate">{currentTrack.title}</h4>
-                <p className="text-[10px] font-mono text-neutral-400 truncate">{currentTrack.genre || "Electronic"}</p>
+              <div className="min-w-0">
+                <h4 className="font-semibold text-white truncate leading-snug text-xs">
+                  {currentTrack.title}
+                </h4>
+                <p className="text-[10px] font-mono text-neutral-400 truncate">
+                  {currentTrack.genre || "Electronic"}
+                </p>
               </div>
             </div>
 
-            <div className="flex flex-col items-center gap-1.5 w-full md:w-2/4">
-              <div className="flex items-center gap-4">
-                <button 
-                  onClick={() => handleSelectTrack(currentTrack)}
-                  className="p-2 rounded-full bg-white text-black hover:scale-105 transition-transform"
-                >
-                  {isPlaying ? (
-                    <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
-                      <rect x="6" y="4" width="4" height="16" rx="1" />
-                      <rect x="14" y="4" width="4" height="16" rx="1" />
-                    </svg>
-                  ) : (
-                    <svg className="w-4 h-4 fill-current ml-0.5" viewBox="0 0 24 24">
-                      <path d="M8 5v14l11-7z" />
-                    </svg>
-                  )}
-                </button>
-              </div>
-
-              <div className="flex items-center gap-3 w-full max-w-md">
-                <span className="text-[10px] font-mono text-neutral-500 w-8 text-right">
-                  {formatTime(progress)}
-                </span>
-                <input 
-                  type="range"
-                  min="0"
-                  max={duration || 0}
-                  value={progress}
-                  onChange={handleSeek}
-                  className="w-full h-1 bg-neutral-800 rounded-lg appearance-none cursor-pointer accent-white"
-                />
-                <span className="text-[10px] font-mono text-neutral-500 w-8">
-                  {formatTime(duration)}
-                </span>
-              </div>
-            </div>
-
-            <div className="hidden md:flex justify-end w-1/4">
-              <button 
-                onClick={() => {
-                  audioRef.current.pause();
-                  setCurrentTrack(null);
-                  setIsPlaying(false);
+            {/* 2. Playback Seeker */}
+            <div className="flex items-center gap-2.5 flex-1 min-w-0">
+              <span className="text-[10px] font-mono text-neutral-300 w-7 text-right flex-shrink-0">
+                {formatTime(progress)}
+              </span>
+              <input 
+                type="range"
+                min="0"
+                max={duration || 100}
+                value={progress}
+                onChange={handleSeek}
+                style={{
+                  background: `linear-gradient(to right, #ffffff ${seekerPercent}%, #262626 ${seekerPercent}%)`
                 }}
-                className="p-1.5 text-neutral-500 hover:text-white rounded-lg hover:bg-neutral-900 transition-colors"
-              >
-                ✕
-              </button>
+                className="w-full h-1.5 rounded-lg cursor-pointer appearance-none border border-neutral-700/60"
+              />
+              <span className="text-[10px] font-mono text-neutral-300 w-7 flex-shrink-0">
+                {formatTime(duration)}
+              </span>
             </div>
+
+            {/* 3. Play/Pause Button */}
+            <button 
+              onClick={() => handleSelectTrack(currentTrack)}
+              className="p-2 rounded-full bg-white text-black hover:scale-105 transition-transform flex-shrink-0 shadow-md"
+              aria-label={isPlaying ? "Pause" : "Play"}
+            >
+              {isPlaying ? (
+                <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
+                  <rect x="6" y="4" width="4" height="16" rx="1" />
+                  <rect x="14" y="4" width="4" height="16" rx="1" />
+                </svg>
+              ) : (
+                <svg className="w-3.5 h-3.5 fill-current ml-0.5" viewBox="0 0 24 24">
+                  <path d="M8 5v14l11-7z" />
+                </svg>
+              )}
+            </button>
+
+            {/* 4. Volume Control */}
+            <div className="hidden sm:flex items-center gap-2 flex-shrink-0">
+              <button 
+                onClick={toggleMute}
+                className="text-neutral-300 hover:text-white transition-colors"
+                aria-label="Toggle Mute"
+              >
+                {volume === 0 ? (
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2" />
+                  </svg>
+                ) : volume < 0.5 ? (
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15.536 8.464a5 5 0 010 7.072" />
+                  </svg>
+                ) : (
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15.536 8.464a5 5 0 010 7.072M17.95 6.05a8 8 0 010 11.314M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
+                  </svg>
+                )}
+              </button>
+              <input 
+                type="range"
+                min="0"
+                max="1"
+                step="0.01"
+                value={volume}
+                onChange={handleVolumeChange}
+                style={{
+                  background: `linear-gradient(to right, #ffffff ${volume * 100}%, #262626 ${volume * 100}%)`
+                }}
+                className="w-16 sm:w-20 h-1.5 rounded-lg cursor-pointer appearance-none border border-neutral-700/60"
+              />
+            </div>
+
+            {/* 5. Close Button */}
+            <button 
+              onClick={() => {
+                if (audioRef.current) audioRef.current.pause();
+                setCurrentTrack(null);
+                setIsPlaying(false);
+              }}
+              className="p-1 text-neutral-400 hover:text-white rounded-md hover:bg-neutral-800/60 transition-colors flex-shrink-0"
+              aria-label="Close player"
+            >
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
 
           </div>
         </div>
