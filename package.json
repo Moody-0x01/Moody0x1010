@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://Moody-0x01.github.io/Folio",
+  "homepage": "https://Moody-0x01.github.io/Moody0x1010",
   "scripts": {
     "dev": "vite",
     "build": "vite build",

@@ -7,19 +7,22 @@ export default function Hero() {
     <section className="relative w-full min-h-[calc(100vh-4rem)] flex flex-col items-center justify-center bg-[#0a0a0a] text-neutral-100 px-6 overflow-hidden">
      
       {/* Background Subtle Grid Pattern */}
-        <div className="absolute inset-0 bg-grid-pattern opacity-60 pointer-events-none" />
-      <div className="absolute top-[0px] left-1/2 -translate-x-1/2 z-0" >
+      <div className="absolute inset-0 bg-grid-pattern opacity-60 pointer-events-none" />
+      
+      {/* Perfectly Centered Orb Wrapper */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-0 w-full max-w-[700px] aspect-square flex items-center justify-center pointer-events-none">
         <Orb
           hoverIntensity={1.39}
           rotateOnHover={false}
-          hue={60}
+          hue={80}
           forceHoverState={false}
           backgroundColor="#ca0000ff"
-          height={1000}
+          height={700}
         />
       </div>
+
       {/* Radial Glow Highlight */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] hero-glow pointer-events-none" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] hero-glow pointer-events-none" />
 
       <div className="relative z-10 max-w-4xl mx-auto text-center flex flex-col items-center">
         
