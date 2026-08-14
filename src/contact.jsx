@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import './css/Contact.css';
 import cv from "./assets/cv.pdf";
+// 1. Import your image here (replace with your actual file name/path)
+import contactImg from "./assets/1782924060744.jpeg"; 
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -46,7 +48,7 @@ export default function Contact() {
     <section id="contact" className="py-24 bg-[#0a0a0a] text-neutral-100 px-6 border-t border-neutral-900 font-sans">
       <div className="max-w-6xl mx-auto">
         
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           
           {/* Left Column: Direct Contact Info & Socials */}
           <div className="lg:col-span-5 space-y-8">
@@ -95,7 +97,7 @@ export default function Contact() {
                 </div>
               </a>
 
-              {/* Download Resume Button (Pretty Green Styling) */}
+              {/* Download Resume Button */}
               <a 
                 href={cv} 
                 download="Lahoucine_Azmoud_CV.pdf"
@@ -152,8 +154,22 @@ export default function Contact() {
             </div>
           </div>
 
-        </div>
+          {/* Right Column: Subtle Square Image */}
+          <div className="lg:col-span-7 flex justify-center lg:justify-end items-center">
+            {/* aspect-square forces a 1:1 ratio. Group handles hover. */}
+            <div className="w-full max-w-sm aspect-square rounded-3xl overflow-hidden group border border-neutral-800">
+              <img 
+                src={contactImg} 
+                alt="Lahoucine Azmoud"
+                className="cursor-pointer w-full h-full object-cover 
+                      grayscale-60 opacity-80 transition-all duration-500 
+                      ease-in-out group-hover:grayscale-50 
+                      group-hover:opacity-80"
+              />
+            </div>
+          </div>
 
+        </div>
       </div>
     </section>
   );
