@@ -32,7 +32,7 @@ const projectsData = [
   {
     title: "Webserv",
     description: "Webserv is a lightweight HTTP web server built in C++, designed to handle client requests efficiently and serve static and dynamic content. The project demonstrates a strong understanding of core networking concepts, request parsing, response generation, and server-side architecture, with supporting front-end assets and scripting for testing and development. It showcases practical experience in systems programming, protocol handling, and building reliable low-level software from scratch.",
-    link: "#",
+    link: "https://github.com/Moody-0x01/webserv",
     technologies: ["C++98", "Socket API"],
     images: [
       "https://github.com/Moody-0x01/webserv/blob/master/img/img1.png?raw=true"
